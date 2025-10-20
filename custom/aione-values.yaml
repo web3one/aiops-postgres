@@ -1,0 +1,44 @@
+userSettings:
+  hostName: ops.fzyun.io
+
+configuration:
+  logging:
+    level: 1
+  database:
+    username: pgadmin
+    password: fzyun2025
+    host: pg-service
+    port: 5432
+    dbname: flyte
+  storage:
+    metadataContainer: flyte
+    userDataContainer: flyte
+    provider: s3
+    providerConfig:
+      s3:
+        region: "us-east-1" #Irrelevant for local but still needed
+        authType: "accesskey"
+        endpoint: "http://oss.dc4.fzyun.io"
+        accessKey: "9AA3LMU3E8NLWONPF420"
+        secretKey: "Z99KZQcDbGK9o19VRLvdFspgCezyNeVb7qVcAryz"
+        disableSSL: "true"
+        secure: "false"
+  inline:
+    plugins:
+      k8s:
+        inject-finalizer: true
+        default-env-vars:
+          - FLYTE_AWS_ENDPOINT: "http://oss.dc4.fzyun.io"
+          - FLYTE_AWS_ACCESS_KEY_ID: "9AA3LMU3E8NLWONPF420"
+          - FLYTE_AWS_SECRET_ACCESS_KEY: "Z99KZQcDbGK9o19VRLvdFspgCezyNeVb7qVcAryz"
+    task_resources:
+      defaults:
+        cpu: 1000m
+        memory: 500Mi #change default requested resources and limits to fit your needs
+      limits:
+        cpu: 4000m
+        memory: 4000Mi
+    storage:
+      cache:
+        max_size_mbs: 100
+        target_gc_percent: 100
