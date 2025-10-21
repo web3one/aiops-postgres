@@ -1,0 +1,1 @@
+kubectl -n aiops-postgres get pods -l application=spilo,cluster-name=aiops-cluster,spilo-role=master
