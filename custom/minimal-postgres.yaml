@@ -1,0 +1,45 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: postgres.aiops-cluster.credentials.postgresql.acid.zalan.do
+  namespace: aiops-postgres
+type: Opaque
+stringData:
+  username: postgres
+  password: aiops2088
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: zalando.aiops-cluster.credentials.postgresql.acid.zalan.do
+  namespace: aiops-postgres
+type: Opaque
+stringData:
+  username: zalando
+  password: aiops2088
+---
+apiVersion: "acid.zalan.do/v1"
+kind: postgresql
+metadata:
+  name: aiops-cluster
+  namespace: aiops-postgres
+spec:
+  teamId: "acid"
+  volume:
+    size: 10Gi
+  numberOfInstances: 2
+  users:
+    zalando:  # database owner
+    - superuser
+    - createdb
+    foo_user: []  # role for application foo
+  databases:
+    foo: zalando  # dbname: owner
+  preparedDatabases:
+    bar: {}
+  postgresql:
+    version: "17"
+  enableMasterLoadBalancer: true
+  allowedSourceRanges:
+  - 172.19.0.0/16
+  - 10.233.0.0/16

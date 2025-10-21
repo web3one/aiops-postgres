@@ -1,0 +1,1 @@
+wsl kubectl patch svc aiops-cluster -n aiops-postgres --type=json -p='[{"op": "remove", "path": "/spec/loadBalancerSourceRanges"}]'

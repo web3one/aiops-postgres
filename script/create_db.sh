@@ -1,1 +1,0 @@
-kubectl apply -f ../custom-values/minimal-postgres.yaml

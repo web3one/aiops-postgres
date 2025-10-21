@@ -1,1 +1,0 @@
-kubectl apply -f ../charts/custom-values/db-svc.yaml
