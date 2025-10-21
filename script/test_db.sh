@@ -1,0 +1,1 @@
+PGPASSWORD=aiops2088 psql -U postgres -h 127.0.0.1 -p 6432
